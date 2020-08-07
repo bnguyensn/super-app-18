@@ -1,0 +1,39 @@
+.charbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 4rem;
+  height: 4rem;
+
+  border-radius: 5px;
+
+  background-color: #8aacc8; /* Blue 100 Dark */
+
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.charbox.correct {
+  background-color: #97b498; /* Green 100 Dark */
+}
+
+.charbox.empty {
+  background-color: #cbae82; /* Orange 100 Dark */
+}
+
+.charbox.selected {
+  background-color: #bbdefb; /* Blue 100 */
+}
+
+.charbox.correct.selected {
+  background-color: #c8e6c9; /* Green 100 */
+}
+
+.charbox.empty.selected {
+  background-color: #ffe0b2; /* Orange 100 */
+}

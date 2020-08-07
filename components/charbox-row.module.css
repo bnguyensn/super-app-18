@@ -1,0 +1,15 @@
+.charbox-row {
+  display: flex;
+}
+
+.charbox-row > * {
+  margin: 0 0.25rem;
+}
+
+.charbox-row > *:first-child {
+  margin: 0 0.25rem 0 0;
+}
+
+.charbox-row > *:last-child {
+  margin: 0 0 0 0.25rem;
+}

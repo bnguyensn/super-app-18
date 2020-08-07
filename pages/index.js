@@ -1,65 +1,107 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, { useState, useEffect } from 'react';
+
+import Head from 'next/head';
+import Layout from '../components/layout/layout';
+import GameArea from '../components/game/game-area';
+
+import useWord from '../libs/useWord';
+import useDefinitions from '../libs/useDefinitions';
 
 export default function Home() {
+  const [wordSet, setWordSet] = useState('');
+  const [selectedCharbox, setSelectedCharbox] = useState(0);
+  const [typedWord, setTypedWord] = useState([]);
+  const [points, setPoints] = useState(0);
+
+  const { data: word, error: wordError, mutate: mutateWord } = useWord({
+    wordSet,
+    count: 1,
+  });
+  const { data: definitions, error: definitionsError } = useDefinitions({
+    word,
+  });
+
+  // Update charboxes when a new word is received
+  useEffect(() => {
+    if (word) {
+      setTypedWord(Array(word.length).fill(''));
+    }
+  }, [word]);
+
+  // Record a correct answer
+  useEffect(() => {
+    const typedWordJoined = typedWord.join('');
+
+    if (
+      word &&
+      typedWordJoined &&
+      typedWordJoined.toLowerCase() === word.toLowerCase()
+    ) {
+      const scoreToAdd = word.length * 10;
+      setPoints((prevPoints) => prevPoints + scoreToAdd);
+      mutateWord();
+    }
+  }, [word, typedWord, mutateWord]);
+
+  const refreshWord = () => {
+    mutateWord();
+  };
+
+  const selectWordSet = (e) => {
+    setWordSet(e.target.value);
+  };
+
+  const updateTypedWord = (char, position) => {
+    if (typedWord) {
+      setTypedWord((curTypedWord) => {
+        const newTypedWord = [...curTypedWord];
+        newTypedWord[position] = char;
+        return newTypedWord;
+      });
+    }
+  };
+
+  const selectPrevCharbox = () => {
+    const prevPosition = Math.max(selectedCharbox - 1, 0);
+    const prevCharbox = document.getElementById(`charbox-${prevPosition}`);
+
+    if (prevCharbox) {
+      prevCharbox.focus();
+    }
+  };
+
+  const selectNextCharbox = () => {
+    const nextPosition = Math.min(selectedCharbox + 1, typedWord.length - 1);
+    const nextCharBox = document.getElementById(`charbox-${nextPosition}`);
+
+    if (nextCharBox) {
+      nextCharBox.focus();
+    }
+  };
+
   return (
-    <div className={styles.container}>
+    <Layout>
       <Head>
-        <title>Create Next App</title>
+        <title>Super App #18 🔥</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      <GameArea
+        word={word}
+        wordError={wordError}
+        refreshWord={refreshWord}
+        typedWord={typedWord}
+        updateTypedWord={updateTypedWord}
+        selectedCharbox={selectedCharbox}
+        setSelectedCharbox={setSelectedCharbox}
+        selectNextCharbox={selectNextCharbox}
+        selectPrevCharbox={selectPrevCharbox}
+        wordSet={wordSet}
+        selectWordSet={selectWordSet}
+        definitions={definitions}
+        definitionsError={definitionsError}
+        points={points}
+      />
+    </Layout>
+  );
 }

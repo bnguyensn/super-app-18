@@ -1,15 +1,26 @@
 {
   "name": "super-app-18",
   "version": "0.1.0",
-  "private": true,
+  "author": "@bnguyensn",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write --loglevel=warn \"**/*.{js,jsx,json,md}\"",
+    "lint": "eslint \"**/*.js\""
   },
   "dependencies": {
+    "clsx": "1.1.1",
     "next": "9.5.1",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "swr": "0.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-react": "^7.20.5",
+    "prettier": "^2.0.5"
   }
 }
