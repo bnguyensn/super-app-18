@@ -83,7 +83,7 @@ export default function Home() {
     <Layout>
       <Head>
         <title>Super App #18 🔥</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon/favicon.ico" />
       </Head>
 
       <GameArea

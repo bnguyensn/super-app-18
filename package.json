@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "author": "@bnguyensn",
   "private": false,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -18,9 +19,12 @@
     "swr": "0.3.0"
   },
   "devDependencies": {
-    "eslint": "^7.6.0",
+    "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-react": "^7.20.5",
-    "prettier": "^2.0.5"
+    "eslint-plugin-react": "^7.20.6",
+    "postcss-flexbugs-fixes": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.0.5",
+    "tailwindcss": "^1.7.3"
   }
 }
