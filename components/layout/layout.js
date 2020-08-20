@@ -6,7 +6,7 @@ import Main from './main';
 
 export default function Layout({ children }) {
   return (
-    <div className="container mx-auto">
+    <div>
       <Header />
       <Main>{children}</Main>
       <Footer />
