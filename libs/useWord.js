@@ -5,9 +5,16 @@ const BASE_URL = 'https://api.noopschallenge.com/wordbot';
 
 const wordFetcher = async (url) => {
   const res = await fetch(url);
-  const json = await res.json();
 
-  return json.words[0];
+  if (!res.ok) {
+    throw new Error('Could not fetch word');
+  }
+
+  const json = await res.json();
+  const word = json.words[0];
+
+  // Strip spaces from the word
+  return word.replace(' ', '');
 };
 
 export default function useWord({ wordSet }) {

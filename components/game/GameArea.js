@@ -6,7 +6,6 @@ import Charbox from '../Charbox';
 
 export default function GameArea({
   word,
-  wordError,
   wordIsValidating,
   typedWord,
   updateTypedWord,
@@ -36,7 +35,7 @@ export default function GameArea({
         <li>No definitions found... 😥 Please refresh the word</li>
       )
     ) : (
-      <li>Loading... ⏳</li>
+      <li>An error occurred... 😥 Please refresh the word</li>
     );
 
   return (
@@ -47,34 +46,41 @@ export default function GameArea({
         refreshWord={refreshWord}
       />
 
-      <div className="mb-8">
-        <h5>Points</h5>
-      </div>
+      <div className="container mx-auto flex flex-col">
+        <div className="mb-4 text-center">
+          <h5>
+            <span className="text-blue-500 font-bold">{points}</span>
+          </h5>
+        </div>
 
-      <div className="mb-8">
-        <h5>Definition</h5>
-        <ol className="list-decimal ml-4">{definitionEls}</ol>
-      </div>
+        <div className="mb-8">
+          <h5>Definition</h5>
+          <ol className="list-decimal ml-4">{definitionEls}</ol>
+        </div>
 
-      <CharboxRow>
-        {word &&
-          word
-            .split('')
-            .map((char, i) => (
-              <Charbox
-                key={`${char}${i}`}
-                id={`charbox-${i}`}
-                position={i}
-                char={char}
-                curChar={typedWord[i]}
-                selected={selectedCharbox === i}
-                setSelectedCharbox={setSelectedCharbox}
-                selectPrevCharbox={selectPrevCharbox}
-                selectNextCharbox={selectNextCharbox}
-                updateTypedWord={updateTypedWord}
-              />
-            ))}
-      </CharboxRow>
+        <CharboxRow>
+          {word &&
+            !wordIsValidating &&
+            definitions &&
+            !definitionsIsValidating &&
+            word
+              .split('')
+              .map((char, i) => (
+                <Charbox
+                  key={`${char}${i}`}
+                  id={`charbox-${i}`}
+                  position={i}
+                  char={char}
+                  curChar={typedWord[i]}
+                  selected={selectedCharbox === i}
+                  setSelectedCharbox={setSelectedCharbox}
+                  selectPrevCharbox={selectPrevCharbox}
+                  selectNextCharbox={selectNextCharbox}
+                  updateTypedWord={updateTypedWord}
+                />
+              ))}
+        </CharboxRow>
+      </div>
     </div>
   );
 }

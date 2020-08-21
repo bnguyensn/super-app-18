@@ -10,11 +10,10 @@ const definitionsFetcher = async (url) => {
   });
 
   if (!res.ok) {
-    throw new Error('No definitions found');
+    throw new Error('Could not fetch definitions');
   }
 
   const json = await res.json();
-
   return json.definitions;
 };
 
