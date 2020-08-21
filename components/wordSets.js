@@ -21,7 +21,7 @@ const wordSets = [
   // 'metals',
   'nouns',
   'objects',
-  'occupations',
+  // 'occupations',
   // 'prepositions',
   'rhymeless',
   'sports',

@@ -39,14 +39,14 @@ export default function GameArea({
     );
 
   return (
-    <div>
+    <div className="container mx-auto px-4 flex flex-col">
       <ControlPanel
         wordSet={wordSet}
         selectWordSet={selectWordSet}
         refreshWord={refreshWord}
       />
 
-      <div className="container mx-auto flex flex-col">
+      <div>
         <div className="mb-4 text-center">
           <h5>
             <span className="text-blue-500 font-bold">{points}</span>
@@ -54,7 +54,7 @@ export default function GameArea({
         </div>
 
         <div className="mb-8">
-          <h5>Definition</h5>
+          <h5>Definition{definitions && definitions.length > 1 && 's'}</h5>
           <ol className="list-decimal ml-4">{definitionEls}</ol>
         </div>
 
@@ -80,6 +80,13 @@ export default function GameArea({
                 />
               ))}
         </CharboxRow>
+
+        <div className="my-8">
+          <h5>History</h5>
+          <ol className="list-decimal ml-4" reversed>
+            {definitionEls}
+          </ol>
+        </div>
       </div>
     </div>
   );
