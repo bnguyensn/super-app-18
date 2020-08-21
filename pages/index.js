@@ -45,6 +45,7 @@ export default function Home() {
 
     if (
       word &&
+      !wordIsValidating &&
       typedWordJoined &&
       typedWordJoined.toLowerCase() === word.toLowerCase()
     ) {
@@ -58,7 +59,7 @@ export default function Home() {
 
       refreshWord();
     }
-  }, [word, typedWord, mutateWord]);
+  }, [word, typedWord, wordIsValidating, mutateWord]);
 
   const refreshWord = () => {
     if (!wordIsValidating) {
