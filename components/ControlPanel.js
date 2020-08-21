@@ -1,6 +1,6 @@
 import React from 'react';
 
-import wordSets from './wordSets.json';
+import wordSets from './wordSets';
 
 export default function ControlPanel({ wordSet, selectWordSet, refreshWord }) {
   return (

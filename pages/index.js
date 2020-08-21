@@ -25,8 +25,9 @@ export default function Home() {
   useEffect(() => {
     if (word) {
       setTypedWord(Array(word.length).fill(''));
+      selectFirstCharbox();
     }
-  }, [word]);
+  }, [word, setTypedWord]);
 
   // Record a correct answer
   useEffect(() => {
@@ -58,6 +59,14 @@ export default function Home() {
         newTypedWord[position] = char;
         return newTypedWord;
       });
+    }
+  };
+
+  const selectFirstCharbox = () => {
+    const firstCharbox = document.getElementById(`charbox-0`);
+
+    if (firstCharbox) {
+      firstCharbox.focus();
     }
   };
 
