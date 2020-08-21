@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Head from 'next/head';
 import Layout from '../components/layout/layout';
-import GameArea from '../components/game/game-area';
+import GameArea from '../components/game/GameArea';
 
 import useWord from '../libs/useWord';
 import useDefinitions from '../libs/useDefinitions';
@@ -13,11 +13,20 @@ export default function Home() {
   const [typedWord, setTypedWord] = useState([]);
   const [points, setPoints] = useState(0);
 
-  const { data: word, error: wordError, mutate: mutateWord } = useWord({
+  const {
+    data: word,
+    error: wordError,
+    mutate: mutateWord,
+    isValidating: wordIsValidating,
+  } = useWord({
     wordSet,
     count: 1,
   });
-  const { data: definitions, error: definitionsError } = useDefinitions({
+  const {
+    data: definitions,
+    error: definitionsError,
+    isValidating: definitionsIsValidating,
+  } = useDefinitions({
     word,
   });
 
@@ -98,7 +107,11 @@ export default function Home() {
       <GameArea
         word={word}
         wordError={wordError}
+        wordIsValidating={wordIsValidating}
         refreshWord={refreshWord}
+        definitions={definitions}
+        definitionsError={definitionsError}
+        definitionsIsValidating={definitionsIsValidating}
         typedWord={typedWord}
         updateTypedWord={updateTypedWord}
         selectedCharbox={selectedCharbox}
@@ -107,8 +120,6 @@ export default function Home() {
         selectPrevCharbox={selectPrevCharbox}
         wordSet={wordSet}
         selectWordSet={selectWordSet}
-        definitions={definitions}
-        definitionsError={definitionsError}
         points={points}
       />
     </Layout>

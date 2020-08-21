@@ -22,6 +22,7 @@ export default function useWord({ wordSet }) {
     wordFetcher,
     {
       revalidateOnFocus: false,
+      shouldRetryOnError: false,
     }
   );
 }

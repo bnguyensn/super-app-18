@@ -8,15 +8,27 @@ const definitionsFetcher = async (url) => {
       Authorization: 'Token 223519a989ceebb9afd10cb0b6dde598ec9a9afd',
     },
   });
+
+  if (!res.ok) {
+    throw new Error('No definitions found');
+  }
+
   const json = await res.json();
 
   return json.definitions;
 };
 
 export default function useDefinitions({ word }) {
-  return useSwr(() => {
-    if (!word) return null;
+  return useSwr(
+    () => {
+      if (!word) return null;
 
-    return `${BASE_URL}/${word}`;
-  }, definitionsFetcher);
+      return `${BASE_URL}/${word}`;
+    },
+    definitionsFetcher,
+    {
+      shouldRetryOnError: false,
+      revalidateOnFocus: false,
+    }
+  );
 }
