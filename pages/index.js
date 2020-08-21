@@ -12,6 +12,7 @@ export default function Home() {
   const [selectedCharbox, setSelectedCharbox] = useState(0);
   const [typedWord, setTypedWord] = useState([]);
   const [points, setPoints] = useState(0);
+  const [history, setHistory] = useState([]);
 
   const {
     data: word,
@@ -49,12 +50,20 @@ export default function Home() {
     ) {
       const scoreToAdd = word.length * 10;
       setPoints((prevPoints) => prevPoints + scoreToAdd);
-      mutateWord();
+
+      setHistory((prevCompletedWords) => [
+        { word, points: scoreToAdd },
+        ...prevCompletedWords,
+      ]);
+
+      refreshWord();
     }
   }, [word, typedWord, mutateWord]);
 
   const refreshWord = () => {
-    mutateWord();
+    if (!wordIsValidating) {
+      mutateWord();
+    }
   };
 
   const selectWordSet = (e) => {
@@ -121,6 +130,7 @@ export default function Home() {
         wordSet={wordSet}
         selectWordSet={selectWordSet}
         points={points}
+        history={history}
       />
     </Layout>
   );

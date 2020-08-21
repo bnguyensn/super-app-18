@@ -1,14 +1,28 @@
 import React from 'react';
 
 import wordSets from './wordSets';
+import clsx from 'clsx';
 
-export default function ControlPanel({ wordSet, selectWordSet, refreshWord }) {
+export default function ControlPanel({
+  wordSet,
+  selectWordSet,
+  refreshWord,
+  disableRefreshWord,
+}) {
   return (
     <div>
       <div className="container mx-auto p-4 flex justify-center items-center space-x-4">
-        <button className="btn btn-primary" onClick={refreshWord}>
+        <button
+          className={clsx(
+            'btn',
+            disableRefreshWord ? 'btn-disabled' : 'btn-primary'
+          )}
+          onClick={refreshWord}
+          disabled={disableRefreshWord}
+        >
           Refresh word
         </button>
+
         <select
           name="wordSets"
           id="word-set-select"

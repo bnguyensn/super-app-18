@@ -1,6 +1,6 @@
 const wordSets = [
-  'adjectives',
-  'adverbs',
+  // 'adjectives',
+  // 'adverbs',
   'animals',
   'common',
   // 'compounds',
@@ -26,7 +26,7 @@ const wordSets = [
   'rhymeless',
   'sports',
   // 'vegetables',
-  'verbs',
+  // 'verbs',
   // 'verbs_past',
   'weather',
   // 'wrestlers',

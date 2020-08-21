@@ -51,6 +51,10 @@ a {
   @apply bg-blue-700;
 }
 
+.btn-disabled {
+  @apply bg-gray-300 text-gray-400 cursor-not-allowed;
+}
+
 /* Start purging... */
 @tailwind utilities;
 /* Stop purging. */

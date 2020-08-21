@@ -20,6 +20,7 @@ export default function GameArea({
   definitionsError,
   definitionsIsValidating,
   points,
+  history,
 }) {
   const definitionEls =
     wordIsValidating || definitionsIsValidating ? (
@@ -44,18 +45,12 @@ export default function GameArea({
         wordSet={wordSet}
         selectWordSet={selectWordSet}
         refreshWord={refreshWord}
+        disableRefreshWord={wordIsValidating || definitionsIsValidating}
       />
 
       <div>
         <div className="mb-4 text-center">
-          <h5>
-            <span className="text-blue-500 font-bold">{points}</span>
-          </h5>
-        </div>
-
-        <div className="mb-8">
-          <h5>Definition{definitions && definitions.length > 1 && 's'}</h5>
-          <ol className="list-decimal ml-4">{definitionEls}</ol>
+          <h3 className="text-blue-500 font-bold">{points}</h3>
         </div>
 
         <CharboxRow>
@@ -81,10 +76,19 @@ export default function GameArea({
               ))}
         </CharboxRow>
 
-        <div className="my-8">
+        <div className="my-4">
+          <h5>Definition{definitions && definitions.length > 1 && 's'}</h5>
+          <ol className="list-decimal ml-4">{definitionEls}</ol>
+        </div>
+
+        <div className="my-4">
           <h5>History</h5>
           <ol className="list-decimal ml-4" reversed>
-            {definitionEls}
+            {history.map(({ word, points }) => (
+              <li key={word}>
+                {word} (+{points} points)
+              </li>
+            ))}
           </ol>
         </div>
       </div>
