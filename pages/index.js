@@ -57,12 +57,19 @@ export default function Home() {
         ...prevCompletedWords,
       ]);
 
-      refreshWord();
+      if (!wordIsValidating) {
+        mutateWord();
+      }
     }
   }, [word, typedWord, wordIsValidating, mutateWord]);
 
-  const refreshWord = () => {
+  const skipWord = () => {
     if (!wordIsValidating) {
+      setHistory((prevCompletedWords) => [
+        { word, points: 0 },
+        ...prevCompletedWords,
+      ]);
+
       mutateWord();
     }
   };
@@ -118,7 +125,7 @@ export default function Home() {
         word={word}
         wordError={wordError}
         wordIsValidating={wordIsValidating}
-        refreshWord={refreshWord}
+        skipWord={skipWord}
         definitions={definitions}
         definitionsError={definitionsError}
         definitionsIsValidating={definitionsIsValidating}

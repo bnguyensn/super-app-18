@@ -6,8 +6,8 @@ import clsx from 'clsx';
 export default function ControlPanel({
   wordSet,
   selectWordSet,
-  refreshWord,
-  disableRefreshWord,
+  skipWord,
+  disableSkipWord,
 }) {
   return (
     <div>
@@ -15,12 +15,12 @@ export default function ControlPanel({
         <button
           className={clsx(
             'btn',
-            disableRefreshWord ? 'btn-disabled' : 'btn-primary'
+            disableSkipWord ? 'btn-disabled' : 'btn-primary'
           )}
-          onClick={refreshWord}
-          disabled={disableRefreshWord}
+          onClick={skipWord}
+          disabled={disableSkipWord}
         >
-          Refresh word
+          Skip word
         </button>
 
         <select

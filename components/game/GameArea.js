@@ -15,7 +15,7 @@ export default function GameArea({
   selectNextCharbox,
   wordSet,
   selectWordSet,
-  refreshWord,
+  skipWord,
   definitions,
   definitionsError,
   definitionsIsValidating,
@@ -26,17 +26,17 @@ export default function GameArea({
     wordIsValidating || definitionsIsValidating ? (
       <li>Loading... ⏳</li>
     ) : definitionsError ? (
-      <li>No definitions found... 😥 Please refresh the word</li>
+      <li>No definitions found... 😥 Please skip this word</li>
     ) : definitions ? (
       definitions.length > 0 ? (
         definitions.map((d) => (
           <li key={d.definition}>{`${d.type ?? ''} - ${d.definition}`}</li>
         ))
       ) : (
-        <li>No definitions found... 😥 Please refresh the word</li>
+        <li>No definitions found... 😥 Please skip this word</li>
       )
     ) : (
-      <li>An error occurred... 😥 Please refresh the word</li>
+      <li>An error occurred... 😥 Please skip this word</li>
     );
 
   return (
@@ -44,8 +44,8 @@ export default function GameArea({
       <ControlPanel
         wordSet={wordSet}
         selectWordSet={selectWordSet}
-        refreshWord={refreshWord}
-        disableRefreshWord={wordIsValidating || definitionsIsValidating}
+        skipWord={skipWord}
+        disableSkipWord={wordIsValidating || definitionsIsValidating}
       />
 
       <div>
@@ -86,7 +86,7 @@ export default function GameArea({
           <ol className="list-decimal ml-4" reversed>
             {history.map(({ word, points }) => (
               <li key={word}>
-                {word} (+{points} points)
+                {`${word} ${points ? `(+${points} points)` : '(skipped)'}`}
               </li>
             ))}
           </ol>
