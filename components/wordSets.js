@@ -20,7 +20,7 @@ const wordSets = [
   'moods',
   // 'metals',
   'nouns',
-  'objects',
+  // 'objects',
   // 'occupations',
   // 'prepositions',
   'rhymeless',
