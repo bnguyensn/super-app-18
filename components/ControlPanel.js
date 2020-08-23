@@ -1,7 +1,7 @@
 import React from 'react';
 
-import wordSets from './wordSets';
 import clsx from 'clsx';
+import wordSets from './wordSets';
 
 export default function ControlPanel({
   wordSet,
@@ -29,7 +29,6 @@ export default function ControlPanel({
           value={wordSet}
           onChange={selectWordSet}
         >
-          <option value="">-- Select a word set --</option>
           {wordSets.map((wordSet) => (
             <option key={wordSet} value={wordSet}>
               {wordSet}

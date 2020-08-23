@@ -8,7 +8,7 @@ import useWord from '../libs/useWord';
 import useDefinitions from '../libs/useDefinitions';
 
 export default function Home() {
-  const [wordSet, setWordSet] = useState('');
+  const [wordSet, setWordSet] = useState('common');
   const [selectedCharbox, setSelectedCharbox] = useState(0);
   const [typedWord, setTypedWord] = useState([]);
   const [points, setPoints] = useState(0);
