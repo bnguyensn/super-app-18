@@ -81,7 +81,7 @@ export default function GameArea({
           <ol className="list-decimal ml-4">{definitionEls}</ol>
         </div>
 
-        <div className="mt-4 mb-8">
+        <div className="mt-4 mb-16">
           <h5>History</h5>
           <ol className="list-decimal ml-4" reversed>
             {history.map(({ word, points }) => (
