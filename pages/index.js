@@ -31,13 +31,14 @@ export default function Home() {
     word,
   });
 
-  // Update charboxes when a new word is received
+  // Update charboxes when a new word and definitions are received
   useEffect(() => {
-    if (word) {
+    if (word && definitions && definitions.length > 0) {
       setTypedWord(Array(word.length).fill(''));
+
       selectFirstCharbox();
     }
-  }, [word, setTypedWord]);
+  }, [word, definitions, setTypedWord]);
 
   // Record a correct answer
   useEffect(() => {
